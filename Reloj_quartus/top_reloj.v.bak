@@ -1,0 +1,19 @@
+module top_reloj (
+	
+	input clk,
+	input reset,
+	output wire clk_lento_monitor
+);
+
+wire clk_1hz;
+
+//Instancia del divisor de frecuencia
+freq_divider divider(
+    .clk_in(clk),
+    .reset(reset), 
+    .clk_out(clk_1hz)
+);
+
+
+
+endmodule 

@@ -1,0 +1,37 @@
+module bcd_counter_00_23 #(
+    parameter integer INIT_VAL = 0  
+)(
+	input wire clk,
+	input wire rst,   
+	input wire en,
+	output reg [3:0] tens,
+	output reg [3:0] ones,
+	output wire carry
+);
+
+// Valor inicial a BCD
+localparam [3:0] INIT_TENS = INIT_VAL / 10;
+localparam [3:0] INIT_ONES = INIT_VAL % 10;
+
+assign carry = en && (tens == 4'd2) && (ones == 4'd3);
+
+always @(posedge clk) begin
+  if (rst) begin
+		tens <= INIT_TENS;
+		ones <= INIT_ONES;
+  end else if (en) begin
+		// 23 -> 00, con carry
+		if ((tens == 4'd2) && (ones == 4'd3)) begin
+			 tens <= 4'd0;
+			 ones <= 4'd0;
+		end else if (ones == 4'd9) begin
+			 ones <= 4'd0;
+			 tens <= tens + 1'b1;
+		end else begin
+			 ones <= ones + 1'b1;
+		end
+  end
+end
+ 
+	
+endmodule

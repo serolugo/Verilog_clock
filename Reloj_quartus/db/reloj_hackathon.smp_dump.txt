@@ -1,0 +1,19 @@
+
+State Machine - |top_reloj|alarm:alarm|sel
+Name sel.00 sel.10 sel.01 
+sel.00 0 0 0 
+sel.01 1 0 1 
+sel.10 1 1 0 
+
+State Machine - |top_reloj|clock:clock|set_mode
+Name set_mode.00 set_mode.10 set_mode.01 
+set_mode.00 0 0 0 
+set_mode.01 1 0 1 
+set_mode.10 1 1 0 
+
+State Machine - |top_reloj|fsm:fsm|state
+Name state.S_TEMP state.S_CRON state.S_ALARM state.S_CLOCK 
+state.S_CLOCK 0 0 0 0 
+state.S_ALARM 0 0 1 1 
+state.S_CRON 0 1 0 1 
+state.S_TEMP 1 0 0 1 

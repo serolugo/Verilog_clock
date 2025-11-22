@@ -1,0 +1,186 @@
+// ================================================================
+// Reloj digital Verilog 2001
+// - clk_1hz : pulso de 1 Hz (incrementa segundos)
+// - clk     : reloj de sistema 50 MHz
+// - reset_n : reset activo en bajo
+// - btn[2:0] activos en bajo:
+//      btn[0] -> cambio formato 12/24 h (toggle)
+//      btn[1] -> botón enclavado: entra/sale de modo ajuste de hora
+//      btn[2] -> en modo ajuste, suma minutos (tipo reloj de pulsera)
+// Salidas en BCD (4 bits) por dígito y flag am/pm (1 = PM, 0 = AM)
+// ================================================================
+module clock (
+    input  wire        clk_1hz,    // 1 Hz
+    input  wire        clk,        // 50 MHz
+    input  wire        reset_n,    // reset activo en bajo
+    input  wire [2:0]  btn,        // botones activos en bajo
+
+    output reg  [3:0]  horas_decenas,
+    output reg  [3:0]  horas_unidades,
+    output reg  [3:0]  minutos_decenas,
+    output reg  [3:0]  minutos_unidades,
+    output reg  [3:0]  segundos_decenas,
+    output reg  [3:0]  segundos_unidades,
+    output reg         am_pm_flag   // 1 = PM, 0 = AM
+);
+
+    // ------------------------------------------------------------
+    // Sincronización a clk (50 MHz) de clk_1hz y botones
+    // ------------------------------------------------------------
+    reg [1:0] clk1hz_sync;
+    reg [1:0] btn0_sync;
+    reg [1:0] btn1_sync;
+    reg [1:0] btn2_sync;
+
+    // Pulsos de borde detectados en dominio de clk
+    wire tick_1hz;      // pulso de subida de clk_1hz
+    wire btn0_press;    // flanco activo (1->0) btn[0]
+    wire btn1_press;    // flanco activo (1->0) btn[1]
+    wire btn2_press;    // flanco activo (1->0) btn[2]
+
+    // Sincronización de señales asíncronas
+    always @(posedge clk or negedge reset_n) begin
+        if (!reset_n) begin
+            clk1hz_sync <= 2'b00;
+            btn0_sync   <= 2'b11;  // botones en reposo (no presionados, activos en bajo)
+            btn1_sync   <= 2'b11;
+            btn2_sync   <= 2'b11;
+        end else begin
+            clk1hz_sync <= {clk1hz_sync[0], clk_1hz};
+
+            btn0_sync   <= {btn0_sync[0], btn[0]};
+            btn1_sync   <= {btn1_sync[0], btn[1]};
+            btn2_sync   <= {btn2_sync[0], btn[2]};
+        end
+    end
+
+    // Detección de bordes
+    assign tick_1hz   = (~clk1hz_sync[1] & clk1hz_sync[0]);         // 0 -> 1
+    assign btn0_press = ( btn0_sync[1]   & ~btn0_sync[0]);          // 1 -> 0 (activo en bajo)
+    assign btn1_press = ( btn1_sync[1]   & ~btn1_sync[0]);          // 1 -> 0
+    assign btn2_press = ( btn2_sync[1]   & ~btn2_sync[0]);          // 1 -> 0
+
+    // ------------------------------------------------------------
+    // Registros internos de tiempo (formato 24 h)
+    // ------------------------------------------------------------
+    reg [5:0] sec;          // 0..59
+    reg [5:0] min;          // 0..59
+    reg [4:0] hour24;       // 0..23
+
+    // Modo de operación
+    reg       fmt_24h;      // 1 = formato 24 h, 0 = formato 12 h
+    reg       set_mode;     // 1 = modo ajuste (se congelan segundos y sólo suben minutos con btn2)
+
+    // ------------------------------------------------------------
+    // Control de formato 12/24h y modo de ajuste (con btn0 y btn1)
+    // ------------------------------------------------------------
+    always @(posedge clk or negedge reset_n) begin
+        if (!reset_n) begin
+            fmt_24h  <= 1'b1;  // por defecto 24 h
+            set_mode <= 1'b0;  // por defecto en modo normal
+        end else begin
+            // Cambio formato 12/24 horas
+            if (btn0_press)
+                fmt_24h <= ~fmt_24h;
+
+            // Botón enclavado: entra/sale de modo ajuste
+            if (btn1_press)
+                set_mode <= ~set_mode;
+        end
+    end
+
+    // ------------------------------------------------------------
+    // Lógica de conteo de tiempo
+    // - En modo normal: se incrementa con tick_1hz
+    // - En modo ajuste: btn2 suma minutos (como reloj de pulsera)
+    // ------------------------------------------------------------
+    always @(posedge clk or negedge reset_n) begin
+        if (!reset_n) begin
+            sec    <= 6'd0;
+            min    <= 6'd0;
+            hour24 <= 5'd0;
+        end else begin
+            if (set_mode) begin
+                // Modo ajuste: sólo se incrementan minutos con btn2
+                if (btn2_press) begin
+                    // Opcional: resetear segundos al ajustar
+                    sec <= 6'd0;
+
+                    if (min == 6'd59) begin
+                        min <= 6'd0;
+                        if (hour24 == 5'd23)
+                            hour24 <= 5'd0;
+                        else
+                            hour24 <= hour24 + 5'd1;
+                    end else begin
+                        min <= min + 6'd1;
+                    end
+                end
+                // No hay avance normal de tiempo en modo ajuste
+            end else begin
+                // Modo normal: reloj corre con el pulso de 1 Hz
+                if (tick_1hz) begin
+                    if (sec == 6'd59) begin
+                        sec <= 6'd0;
+                        if (min == 6'd59) begin
+                            min <= 6'd0;
+                            if (hour24 == 5'd23)
+                                hour24 <= 5'd0;
+                            else
+                                hour24 <= hour24 + 5'd1;
+                        end else begin
+                            min <= min + 6'd1;
+                        end
+                    end else begin
+                        sec <= sec + 6'd1;
+                    end
+                end
+            end
+        end
+    end
+
+    // ------------------------------------------------------------
+    // Conversión a BCD y bandera AM/PM
+    // ------------------------------------------------------------
+    reg [4:0] hour_disp;  // valor de hora que se mostrará (12h o 24h)
+
+    always @* begin
+        // Bandera AM/PM basada siempre en la hora interna 24 h
+        // 0..11 -> AM (0), 12..23 -> PM (1)
+        if (hour24 >= 5'd12)
+            am_pm_flag = 1'b1;   // PM
+        else
+            am_pm_flag = 1'b0;   // AM
+
+        // Seleccionar valor de hora que se va a mostrar
+        if (fmt_24h) begin
+            // Formato 24 h: 00..23
+            hour_disp = hour24;
+        end else begin
+            // Formato 12 h:
+            // 00:xx -> 12:xx AM
+            // 01:xx..11:xx -> igual
+            // 12:xx -> 12:xx PM
+            // 13..23 -> 1..11 PM
+            if (hour24 == 5'd0)
+                hour_disp = 5'd12;          // 0 -> 12
+            else if (hour24 <= 5'd12)
+                hour_disp = hour24;         // 1..12
+            else
+                hour_disp = hour24 - 5'd12; // 13..23 -> 1..11
+        end
+
+        // Horas a BCD
+        horas_decenas  = hour_disp / 10;
+        horas_unidades = hour_disp % 10;
+
+        // Minutos a BCD
+        minutos_decenas  = min / 10;
+        minutos_unidades = min % 10;
+
+        // Segundos a BCD
+        segundos_decenas  = sec / 10;
+        segundos_unidades = sec % 10;
+    end
+
+endmodule

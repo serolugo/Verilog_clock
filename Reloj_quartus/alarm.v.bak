@@ -1,0 +1,25 @@
+module alarm (
+	input clk,
+	input reset,
+	input [2:0] btn,
+	
+	input [6:0] horas_decenas_in,
+	input [6:0] horas_unidades_in,
+	input [6:0] minutos_decenas_in,
+	input [6:0] minutos_unidades_in,
+	input [6:0] segundos_decenas_in,
+	input [6:0] segundos_unidades_in,
+
+	output [6:0] horas_decenas,
+	output [6:0] horas_unidades,
+	output [6:0] minutos_decenas,
+	output [6:0] minutos_unidades,
+	output [6:0] segundos_decenas,
+	output [6:0] segundos_unidades,
+	
+	output wire flag_alarm
+);
+
+
+
+endmodule 

@@ -1,0 +1,20 @@
+// mux_n.v
+// Parametric N:1 multiplexer
+// Works for any input width and any number of inputs (power of two recommended)
+
+module mux #(
+    
+)(
+    input  wire [6:0] data,
+    input  wire [1;0] sel,      
+    output reg  [WIDTH-1:0] y             // output
+);
+    integer i;
+    always @(*) begin
+        y = {WIDTH{1'b0}};    // default output
+        for (i = 0; i < N; i = i + 1) begin
+            if (sel == i)
+                y = data[i];
+        end
+    end
+endmodule

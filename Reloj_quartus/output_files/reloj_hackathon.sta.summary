@@ -1,0 +1,89 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'freq_divider:divider_3hz|clk_out'
+Slack : -26.012
+TNS   : -45.860
+
+Type  : Slow 1200mV 85C Model Setup 'clk'
+Slack : -8.946
+TNS   : -1671.965
+
+Type  : Slow 1200mV 85C Model Hold 'clk'
+Slack : 0.387
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'freq_divider:divider_3hz|clk_out'
+Slack : 0.394
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk'
+Slack : -3.000
+TNS   : -446.325
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'freq_divider:divider_3hz|clk_out'
+Slack : -1.285
+TNS   : -17.990
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'fsm:fsm|state.S_CLOCK'
+Slack : 0.394
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'freq_divider:divider_3hz|clk_out'
+Slack : -23.526
+TNS   : -40.462
+
+Type  : Slow 1200mV 0C Model Setup 'clk'
+Slack : -8.037
+TNS   : -1481.106
+
+Type  : Slow 1200mV 0C Model Hold 'clk'
+Slack : 0.340
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'freq_divider:divider_3hz|clk_out'
+Slack : 0.352
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk'
+Slack : -3.000
+TNS   : -446.325
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'freq_divider:divider_3hz|clk_out'
+Slack : -1.285
+TNS   : -17.990
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'fsm:fsm|state.S_CLOCK'
+Slack : 0.387
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'freq_divider:divider_3hz|clk_out'
+Slack : -12.011
+TNS   : -14.976
+
+Type  : Fast 1200mV 0C Model Setup 'clk'
+Slack : -3.839
+TNS   : -660.445
+
+Type  : Fast 1200mV 0C Model Hold 'clk'
+Slack : 0.102
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'freq_divider:divider_3hz|clk_out'
+Slack : 0.183
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk'
+Slack : -3.000
+TNS   : -372.222
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'freq_divider:divider_3hz|clk_out'
+Slack : -1.000
+TNS   : -14.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'fsm:fsm|state.S_CLOCK'
+Slack : 0.380
+TNS   : 0.000
+
+------------------------------------------------------------

@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Fri Nov 21 14:33:17 2025
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : reloj_hackathon
+Top-level Entity Name : top_reloj
+Family : Cyclone IV E
+Total logic elements : 1,517
+    Total combinational functions : 1,504
+    Dedicated logic registers : 359
+Total registers : 359
+Total pins : 64
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0

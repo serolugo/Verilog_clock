@@ -1,0 +1,17 @@
+module cronometer (
+	input clk,
+	input clk_1khz, 
+	input reset,
+	input [2:0] btn,
+	//outputs
+	output wire [3:0] minutos_decenas,
+	output wire [3:0] minutos_unidades,
+	output wire [3:0] segundos_decenas,
+	output wire [3:0] segundos_unidades,
+	output wire [3:0] milisegundos_decenas,
+	output wire [3:0] milisegundos_unidades
+);
+
+
+
+endmodule

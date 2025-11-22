@@ -1,0 +1,35 @@
+module bcd_counter_00_59(
+	input wire clk,
+	input wire rst,      // activo en alto
+	input wire en,
+	output reg [3:0] tens,
+	output reg [3:0] ones,
+	output reg carry
+);
+
+always @(posedge clk) begin
+  if (rst) begin
+		tens <= 4'd0;
+		ones <= 4'd0;
+		carry <= 1'b0;
+  end else if (en) begin
+		carry <= 1'b0;
+
+		if (ones == 4'd9) begin
+			 ones <= 4'd0;
+			 if (tens == 4'd5) begin
+				  tens <= 4'd0;
+				  carry <= 1'b1;  
+			 end else begin
+				  tens <= tens + 4'd1;
+			 end
+		end else begin
+			 ones <= ones + 4'd1;
+		end
+  end else begin
+		carry <= 1'b0;
+  end
+end
+
+endmodule
+
