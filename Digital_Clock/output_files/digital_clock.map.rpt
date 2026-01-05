@@ -1,0 +1,1151 @@
+Analysis & Synthesis report for digital_clock
+Mon Jan 05 16:43:16 2026
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |top_reloj|alarm:alarm|sel
+  9. State Machine - |top_reloj|clock:clock|set_mode
+ 10. State Machine - |top_reloj|fsm:fsm|state
+ 11. User-Specified and Inferred Latches
+ 12. Registers Removed During Synthesis
+ 13. General Register Statistics
+ 14. Inverted Register Statistics
+ 15. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 16. Parameter Settings for User Entity Instance: Top-level Entity: |top_reloj
+ 17. Parameter Settings for User Entity Instance: freq_divider:divider_1hz
+ 18. Parameter Settings for User Entity Instance: freq_divider:divider_3hz
+ 19. Parameter Settings for User Entity Instance: freq_divider:divider_1khz
+ 20. Parameter Settings for User Entity Instance: clock:clock
+ 21. Parameter Settings for User Entity Instance: clock:clock|bcd_counter_00_23:u_hour
+ 22. Parameter Settings for User Entity Instance: buzzer:buzzer_alarma
+ 23. Parameter Settings for User Entity Instance: seven_seg_decoder:display_2_clock
+ 24. Parameter Settings for User Entity Instance: seven_seg_decoder:display_2_cron
+ 25. Parameter Settings for User Entity Instance: seven_seg_decoder:display_2_temp
+ 26. Parameter Settings for User Entity Instance: seven_seg_decoder:display_2_alarm
+ 27. Parameter Settings for User Entity Instance: seven_seg_decoder:display_3_clock
+ 28. Parameter Settings for User Entity Instance: seven_seg_decoder:display_3_cron
+ 29. Parameter Settings for User Entity Instance: seven_seg_decoder:display_3_temp
+ 30. Parameter Settings for User Entity Instance: seven_seg_decoder:display_3_alarm
+ 31. Parameter Settings for User Entity Instance: seven_seg_decoder:display_4_clock
+ 32. Parameter Settings for User Entity Instance: seven_seg_decoder:display_4_cron
+ 33. Parameter Settings for User Entity Instance: seven_seg_decoder:display_4_temp
+ 34. Parameter Settings for User Entity Instance: seven_seg_decoder:display_4_alarm
+ 35. Parameter Settings for User Entity Instance: seven_seg_decoder:display_5_clock
+ 36. Parameter Settings for User Entity Instance: seven_seg_decoder:display_5_cron
+ 37. Parameter Settings for User Entity Instance: seven_seg_decoder:display_5_temp
+ 38. Parameter Settings for User Entity Instance: seven_seg_decoder:display_5_alarm
+ 39. Parameter Settings for User Entity Instance: seven_seg_decoder:display_6_clock
+ 40. Parameter Settings for User Entity Instance: seven_seg_decoder:display_6_cron
+ 41. Parameter Settings for User Entity Instance: seven_seg_decoder:display_6_temp
+ 42. Parameter Settings for User Entity Instance: seven_seg_decoder:display_6_alarm
+ 43. Parameter Settings for User Entity Instance: seven_seg_decoder:display_7_clock
+ 44. Parameter Settings for User Entity Instance: seven_seg_decoder:display_7_cron
+ 45. Parameter Settings for User Entity Instance: seven_seg_decoder:display_7_temp
+ 46. Parameter Settings for User Entity Instance: seven_seg_decoder:display_7_alarm
+ 47. Parameter Settings for Inferred Entity Instance: clock:clock|lpm_divide:Mod0
+ 48. Parameter Settings for Inferred Entity Instance: clock:clock|lpm_divide:Div0
+ 49. Port Connectivity Checks: "mux:mux_disp_1"
+ 50. Port Connectivity Checks: "mux:mux_disp_0"
+ 51. Port Connectivity Checks: "temp:temp|bcd_down_00_59:u_min"
+ 52. Port Connectivity Checks: "temp:temp|bcd_down_00_59:u_sec"
+ 53. Port Connectivity Checks: "temp:temp|bcd_down_00_99:u_cs"
+ 54. Port Connectivity Checks: "temp:temp"
+ 55. Port Connectivity Checks: "cronometer:cronometer|bcd_counter_00_59:u_min"
+ 56. Port Connectivity Checks: "clock:clock|bcd_counter_00_23:u_hour"
+ 57. Post-Synthesis Netlist Statistics for Top Partition
+ 58. Elapsed Time Per Partition
+ 59. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+
+
+
++----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                     ;
++------------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Mon Jan 05 16:43:16 2026       ;
+; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
+; Revision Name                      ; digital_clock                               ;
+; Top-level Entity Name              ; top_reloj                                   ;
+; Family                             ; Cyclone IV E                                ;
+; Total logic elements               ; 1,517                                       ;
+;     Total combinational functions  ; 1,504                                       ;
+;     Dedicated logic registers      ; 359                                         ;
+; Total registers                    ; 359                                         ;
+; Total pins                         ; 64                                          ;
+; Total virtual pins                 ; 0                                           ;
+; Total memory bits                  ; 0                                           ;
+; Embedded Multiplier 9-bit elements ; 0                                           ;
+; Total PLLs                         ; 0                                           ;
++------------------------------------+---------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                           ; EP4CE115F29C7      ;                    ;
+; Top-level entity name                                            ; top_reloj          ; digital_clock      ;
+; Family name                                                      ; Cyclone IV E       ; Cyclone V          ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                     ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; DSP Block Balancing                                              ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto ROM Replacement                                             ; On                 ; On                 ;
+; Auto RAM Replacement                                             ; On                 ; On                 ;
+; Auto DSP Block Replacement                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Strict RAM Replacement                                           ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto RAM Block Balancing                                         ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                    ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Timing-Driven Synthesis                                          ; On                 ; On                 ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                      ; Off                ; Off                ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; SDC constraint protection                                        ; Off                ; Off                ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                             ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                           ; On                 ; On                 ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 12          ;
+; Maximum allowed            ; 12          ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 12          ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
+;     Processor 3            ;   0.0%      ;
+;     Processor 4            ;   0.0%      ;
+;     Processor 5            ;   0.0%      ;
+;     Processor 6            ;   0.0%      ;
+;     Processor 7            ;   0.0%      ;
+;     Processor 8            ;   0.0%      ;
+;     Processors 9-12        ;   0.0%      ;
++----------------------------+-------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                   ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                               ; Library ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------+---------+
+; freq_divider.v                   ; yes             ; User Verilog HDL File        ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/freq_divider.v               ;         ;
+; top_reloj.v                      ; yes             ; User Verilog HDL File        ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v                  ;         ;
+; fsm.v                            ; yes             ; User Verilog HDL File        ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/fsm.v                        ;         ;
+; seven_seg_decoder.v              ; yes             ; User Verilog HDL File        ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/seven_seg_decoder.v          ;         ;
+; mux.v                            ; yes             ; User Verilog HDL File        ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/mux.v                        ;         ;
+; demux.v                          ; yes             ; User Verilog HDL File        ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/demux.v                      ;         ;
+; clock.v                          ; yes             ; User Verilog HDL File        ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/clock.v                      ;         ;
+; bcd_counter_00_59.v              ; yes             ; User Verilog HDL File        ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/bcd_counter_00_59.v          ;         ;
+; bcd_counter_00_23.v              ; yes             ; User Verilog HDL File        ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/bcd_counter_00_23.v          ;         ;
+; decoder_esp.v                    ; yes             ; User Verilog HDL File        ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/decoder_esp.v                ;         ;
+; cronometer.v                     ; yes             ; User Verilog HDL File        ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/cronometer.v                 ;         ;
+; bcd_counter_00_99.v              ; yes             ; User Verilog HDL File        ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/bcd_counter_00_99.v          ;         ;
+; temp.v                           ; yes             ; User Verilog HDL File        ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/temp.v                       ;         ;
+; alarm.v                          ; yes             ; User Verilog HDL File        ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/alarm.v                      ;         ;
+; buzzer.v                         ; yes             ; User Verilog HDL File        ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/buzzer.v                     ;         ;
+; bcd_down_00_59.v                 ; yes             ; User Verilog HDL File        ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/bcd_down_00_59.v             ;         ;
+; bcd_down_00_99.v                 ; yes             ; User Verilog HDL File        ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/bcd_down_00_99.v             ;         ;
+; lpm_divide.tdf                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_divide.tdf      ;         ;
+; abs_divider.inc                  ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/abs_divider.inc     ;         ;
+; sign_div_unsign.inc              ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/sign_div_unsign.inc ;         ;
+; aglobal181.inc                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/aglobal181.inc      ;         ;
+; db/lpm_divide_soo.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/db/lpm_divide_soo.tdf        ;         ;
+; db/abs_divider_kbg.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/db/abs_divider_kbg.tdf       ;         ;
+; db/alt_u_div_67f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/db/alt_u_div_67f.tdf         ;         ;
+; db/add_sub_7pc.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/db/add_sub_7pc.tdf           ;         ;
+; db/add_sub_8pc.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/db/add_sub_8pc.tdf           ;         ;
+; db/lpm_abs_2v9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/db/lpm_abs_2v9.tdf           ;         ;
+; db/lpm_abs_i0a.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/db/lpm_abs_i0a.tdf           ;         ;
+; db/lpm_divide_p0p.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/db/lpm_divide_p0p.tdf        ;         ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------+---------+
+
+
++-----------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary               ;
++---------------------------------------------+-------------+
+; Resource                                    ; Usage       ;
++---------------------------------------------+-------------+
+; Estimated Total logic elements              ; 1,517       ;
+;                                             ;             ;
+; Total combinational functions               ; 1504        ;
+; Logic element usage by number of LUT inputs ;             ;
+;     -- 4 input functions                    ; 560         ;
+;     -- 3 input functions                    ; 274         ;
+;     -- <=2 input functions                  ; 670         ;
+;                                             ;             ;
+; Logic elements by mode                      ;             ;
+;     -- normal mode                          ; 1049        ;
+;     -- arithmetic mode                      ; 455         ;
+;                                             ;             ;
+; Total registers                             ; 359         ;
+;     -- Dedicated logic registers            ; 359         ;
+;     -- I/O registers                        ; 0           ;
+;                                             ;             ;
+; I/O pins                                    ; 64          ;
+;                                             ;             ;
+; Embedded Multiplier 9-bit elements          ; 0           ;
+;                                             ;             ;
+; Maximum fan-out node                        ; reset~input ;
+; Maximum fan-out                             ; 347         ;
+; Total fan-out                               ; 5516        ;
+; Average fan-out                             ; 2.77        ;
++---------------------------------------------+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                          ;
++------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------+-------------------+--------------+
+; Compilation Hierarchy Node               ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                 ; Entity Name       ; Library Name ;
++------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------+-------------------+--------------+
+; |top_reloj                               ; 1504 (0)            ; 359 (0)                   ; 0           ; 0            ; 0       ; 0         ; 64   ; 0            ; |top_reloj                                                                                                          ; top_reloj         ; work         ;
+;    |alarm:alarm|                         ; 91 (91)             ; 37 (37)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|alarm:alarm                                                                                              ; alarm             ; work         ;
+;    |buzzer:buzzer_alarma|                ; 17 (17)             ; 14 (14)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|buzzer:buzzer_alarma                                                                                     ; buzzer            ; work         ;
+;    |clock:clock|                         ; 358 (71)            ; 39 (13)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|clock:clock                                                                                              ; clock             ; work         ;
+;       |bcd_counter_00_23:u_hour|         ; 19 (19)             ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|clock:clock|bcd_counter_00_23:u_hour                                                                     ; bcd_counter_00_23 ; work         ;
+;       |bcd_counter_00_59:u_min|          ; 17 (17)             ; 9 (9)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|clock:clock|bcd_counter_00_59:u_min                                                                      ; bcd_counter_00_59 ; work         ;
+;       |bcd_counter_00_59:u_sec|          ; 18 (18)             ; 9 (9)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|clock:clock|bcd_counter_00_59:u_sec                                                                      ; bcd_counter_00_59 ; work         ;
+;       |lpm_divide:Div0|                  ; 107 (0)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|clock:clock|lpm_divide:Div0                                                                              ; lpm_divide        ; work         ;
+;          |lpm_divide_p0p:auto_generated| ; 107 (0)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|clock:clock|lpm_divide:Div0|lpm_divide_p0p:auto_generated                                                ; lpm_divide_p0p    ; work         ;
+;             |abs_divider_kbg:divider|    ; 107 (4)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|clock:clock|lpm_divide:Div0|lpm_divide_p0p:auto_generated|abs_divider_kbg:divider                        ; abs_divider_kbg   ; work         ;
+;                |alt_u_div_67f:divider|   ; 101 (101)           ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|clock:clock|lpm_divide:Div0|lpm_divide_p0p:auto_generated|abs_divider_kbg:divider|alt_u_div_67f:divider  ; alt_u_div_67f     ; work         ;
+;                |lpm_abs_i0a:my_abs_num|  ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|clock:clock|lpm_divide:Div0|lpm_divide_p0p:auto_generated|abs_divider_kbg:divider|lpm_abs_i0a:my_abs_num ; lpm_abs_i0a       ; work         ;
+;       |lpm_divide:Mod0|                  ; 126 (0)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|clock:clock|lpm_divide:Mod0                                                                              ; lpm_divide        ; work         ;
+;          |lpm_divide_soo:auto_generated| ; 126 (0)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|clock:clock|lpm_divide:Mod0|lpm_divide_soo:auto_generated                                                ; lpm_divide_soo    ; work         ;
+;             |abs_divider_kbg:divider|    ; 126 (4)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|clock:clock|lpm_divide:Mod0|lpm_divide_soo:auto_generated|abs_divider_kbg:divider                        ; abs_divider_kbg   ; work         ;
+;                |alt_u_div_67f:divider|   ; 109 (109)           ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|clock:clock|lpm_divide:Mod0|lpm_divide_soo:auto_generated|abs_divider_kbg:divider|alt_u_div_67f:divider  ; alt_u_div_67f     ; work         ;
+;                |lpm_abs_i0a:my_abs_num|  ; 13 (13)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|clock:clock|lpm_divide:Mod0|lpm_divide_soo:auto_generated|abs_divider_kbg:divider|lpm_abs_i0a:my_abs_num ; lpm_abs_i0a       ; work         ;
+;    |cronometer:cronometer|               ; 65 (15)             ; 35 (9)                    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|cronometer:cronometer                                                                                    ; cronometer        ; work         ;
+;       |bcd_counter_00_59:u_min|          ; 16 (16)             ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|cronometer:cronometer|bcd_counter_00_59:u_min                                                            ; bcd_counter_00_59 ; work         ;
+;       |bcd_counter_00_59:u_sec|          ; 17 (17)             ; 9 (9)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|cronometer:cronometer|bcd_counter_00_59:u_sec                                                            ; bcd_counter_00_59 ; work         ;
+;       |bcd_counter_00_99:u_ms|           ; 17 (17)             ; 9 (9)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|cronometer:cronometer|bcd_counter_00_99:u_ms                                                             ; bcd_counter_00_99 ; work         ;
+;    |demux:demux|                         ; 11 (11)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|demux:demux                                                                                              ; demux             ; work         ;
+;    |freq_divider:divider_1hz|            ; 203 (203)           ; 64 (64)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|freq_divider:divider_1hz                                                                                 ; freq_divider      ; work         ;
+;    |freq_divider:divider_1khz|           ; 197 (197)           ; 61 (61)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|freq_divider:divider_1khz                                                                                ; freq_divider      ; work         ;
+;    |freq_divider:divider_3hz|            ; 203 (203)           ; 64 (64)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|freq_divider:divider_3hz                                                                                 ; freq_divider      ; work         ;
+;    |fsm:fsm|                             ; 9 (9)               ; 6 (6)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|fsm:fsm                                                                                                  ; fsm               ; work         ;
+;    |mux:mux_disp_0|                      ; 5 (5)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|mux:mux_disp_0                                                                                           ; mux               ; work         ;
+;    |mux:mux_disp_1|                      ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|mux:mux_disp_1                                                                                           ; mux               ; work         ;
+;    |mux:mux_disp_2|                      ; 14 (14)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|mux:mux_disp_2                                                                                           ; mux               ; work         ;
+;    |mux:mux_disp_3|                      ; 14 (14)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|mux:mux_disp_3                                                                                           ; mux               ; work         ;
+;    |mux:mux_disp_4|                      ; 14 (14)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|mux:mux_disp_4                                                                                           ; mux               ; work         ;
+;    |mux:mux_disp_5|                      ; 14 (14)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|mux:mux_disp_5                                                                                           ; mux               ; work         ;
+;    |mux:mux_disp_6|                      ; 14 (14)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|mux:mux_disp_6                                                                                           ; mux               ; work         ;
+;    |mux:mux_disp_7|                      ; 14 (14)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|mux:mux_disp_7                                                                                           ; mux               ; work         ;
+;    |seven_seg_decoder:display_2_alarm|   ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_2_alarm                                                                        ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_2_clock|   ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_2_clock                                                                        ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_2_cron|    ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_2_cron                                                                         ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_2_temp|    ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_2_temp                                                                         ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_3_alarm|   ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_3_alarm                                                                        ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_3_clock|   ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_3_clock                                                                        ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_3_cron|    ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_3_cron                                                                         ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_3_temp|    ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_3_temp                                                                         ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_4_alarm|   ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_4_alarm                                                                        ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_4_clock|   ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_4_clock                                                                        ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_4_cron|    ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_4_cron                                                                         ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_4_temp|    ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_4_temp                                                                         ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_5_alarm|   ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_5_alarm                                                                        ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_5_clock|   ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_5_clock                                                                        ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_5_cron|    ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_5_cron                                                                         ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_5_temp|    ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_5_temp                                                                         ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_6_alarm|   ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_6_alarm                                                                        ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_6_clock|   ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_6_clock                                                                        ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_6_cron|    ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_6_cron                                                                         ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_6_temp|    ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_6_temp                                                                         ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_7_alarm|   ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_7_alarm                                                                        ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_7_clock|   ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_7_clock                                                                        ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_7_cron|    ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_7_cron                                                                         ; seven_seg_decoder ; work         ;
+;    |seven_seg_decoder:display_7_temp|    ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|seven_seg_decoder:display_7_temp                                                                         ; seven_seg_decoder ; work         ;
+;    |temp:temp|                           ; 90 (44)             ; 39 (13)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|temp:temp                                                                                                ; temp              ; work         ;
+;       |bcd_down_00_59:u_min|             ; 12 (12)             ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|temp:temp|bcd_down_00_59:u_min                                                                           ; bcd_down_00_59    ; work         ;
+;       |bcd_down_00_59:u_sec|             ; 15 (15)             ; 9 (9)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|temp:temp|bcd_down_00_59:u_sec                                                                           ; bcd_down_00_59    ; work         ;
+;       |bcd_down_00_99:u_cs|              ; 19 (19)             ; 9 (9)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_reloj|temp:temp|bcd_down_00_99:u_cs                                                                            ; bcd_down_00_99    ; work         ;
++------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------+-------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++--------------------------------------------+
+; State Machine - |top_reloj|alarm:alarm|sel ;
++--------+--------+--------+-----------------+
+; Name   ; sel.00 ; sel.10 ; sel.01          ;
++--------+--------+--------+-----------------+
+; sel.00 ; 0      ; 0      ; 0               ;
+; sel.01 ; 1      ; 0      ; 1               ;
+; sel.10 ; 1      ; 1      ; 0               ;
++--------+--------+--------+-----------------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------+
+; State Machine - |top_reloj|clock:clock|set_mode       ;
++-------------+-------------+-------------+-------------+
+; Name        ; set_mode.00 ; set_mode.10 ; set_mode.01 ;
++-------------+-------------+-------------+-------------+
+; set_mode.00 ; 0           ; 0           ; 0           ;
+; set_mode.01 ; 1           ; 0           ; 1           ;
+; set_mode.10 ; 1           ; 1           ; 0           ;
++-------------+-------------+-------------+-------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------+
+; State Machine - |top_reloj|fsm:fsm|state                                    ;
++---------------+--------------+--------------+---------------+---------------+
+; Name          ; state.S_TEMP ; state.S_CRON ; state.S_ALARM ; state.S_CLOCK ;
++---------------+--------------+--------------+---------------+---------------+
+; state.S_CLOCK ; 0            ; 0            ; 0             ; 0             ;
+; state.S_ALARM ; 0            ; 0            ; 1             ; 1             ;
+; state.S_CRON  ; 0            ; 1            ; 0             ; 1             ;
+; state.S_TEMP  ; 1            ; 0            ; 0             ; 1             ;
++---------------+--------------+--------------+---------------+---------------+
+
+
++----------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                ;
++-----------------------------------------------------+---------------------+------------------------+
+; Latch Name                                          ; Latch Enable Signal ; Free of Timing Hazards ;
++-----------------------------------------------------+---------------------+------------------------+
+; demux:demux|btn_cron[1]                             ; mux:mux_disp_0|Mux3 ; yes                    ;
+; demux:demux|btn_clock[0]                            ; mux:mux_disp_0|Mux3 ; yes                    ;
+; demux:demux|btn_clock[2]                            ; mux:mux_disp_0|Mux3 ; yes                    ;
+; demux:demux|btn_alarm[0]                            ; mux:mux_disp_0|Mux3 ; yes                    ;
+; demux:demux|btn_alarm[1]                            ; mux:mux_disp_0|Mux3 ; yes                    ;
+; demux:demux|btn_temp[1]                             ; mux:mux_disp_0|Mux3 ; yes                    ;
+; demux:demux|btn_temp[2]                             ; mux:mux_disp_0|Mux3 ; yes                    ;
+; demux:demux|btn_clock[1]                            ; mux:mux_disp_0|Mux3 ; yes                    ;
+; demux:demux|btn_alarm[2]                            ; mux:mux_disp_0|Mux3 ; yes                    ;
+; demux:demux|btn_cron[0]                             ; mux:mux_disp_0|Mux3 ; yes                    ;
+; demux:demux|btn_temp[0]                             ; mux:mux_disp_0|Mux3 ; yes                    ;
+; Number of user-specified and inferred latches = 11  ;                     ;                        ;
++-----------------------------------------------------+---------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++---------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                              ;
++----------------------------------------+----------------------------------------+
+; Register name                          ; Reason for Removal                     ;
++----------------------------------------+----------------------------------------+
+; freq_divider:divider_1khz|acc[0..3]    ; Stuck at GND due to stuck port data_in ;
+; freq_divider:divider_3hz|acc[0]        ; Stuck at GND due to stuck port data_in ;
+; freq_divider:divider_1hz|acc[0]        ; Stuck at GND due to stuck port data_in ;
+; clock:clock|clk3hz_ff0                 ; Merged with alarm:alarm|clk3_ff0       ;
+; clock:clock|clk3hz_ff1                 ; Merged with alarm:alarm|clk3_ff1       ;
+; fsm:fsm|state~2                        ; Lost fanout                            ;
+; fsm:fsm|state~3                        ; Lost fanout                            ;
+; Total Number of Removed Registers = 10 ;                                        ;
++----------------------------------------+----------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 359   ;
+; Number of registers using Synchronous Clear  ; 175   ;
+; Number of registers using Synchronous Load   ; 1     ;
+; Number of registers using Asynchronous Clear ; 64    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 94    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------+
+; Inverted Register Statistics                      ;
++-----------------------------------------+---------+
+; Inverted Register                       ; Fan out ;
++-----------------------------------------+---------+
+; alarm:alarm|blink                       ; 25      ;
+; clock:clock|blink                       ; 17      ;
+; clock:clock|btn_ff1[0]                  ; 1       ;
+; clock:clock|btn_ff0[0]                  ; 2       ;
+; clock:clock|btn_ff0[2]                  ; 2       ;
+; clock:clock|btn_ff1[2]                  ; 1       ;
+; alarm:alarm|btn_ff0[0]                  ; 9       ;
+; alarm:alarm|btn_ff1[0]                  ; 8       ;
+; alarm:alarm|btn_ff0[1]                  ; 2       ;
+; alarm:alarm|btn_ff1[1]                  ; 1       ;
+; clock:clock|btn_ff0[1]                  ; 2       ;
+; clock:clock|btn_ff1[1]                  ; 1       ;
+; alarm:alarm|btn_ff1[2]                  ; 1       ;
+; alarm:alarm|btn_ff0[2]                  ; 2       ;
+; Total number of inverted registers = 14 ;         ;
++-----------------------------------------+---------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------+
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_reloj|alarm:alarm|alarm_h_t[3]                              ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_reloj|alarm:alarm|alarm_h_o[3]                              ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |top_reloj|buzzer:buzzer_alarma|tick_count[7]                    ;
+; 3:1                ; 57 bits   ; 114 LEs       ; 114 LEs              ; 0 LEs                  ; Yes        ; |top_reloj|freq_divider:divider_3hz|acc[23]                      ;
+; 3:1                ; 57 bits   ; 114 LEs       ; 114 LEs              ; 0 LEs                  ; Yes        ; |top_reloj|freq_divider:divider_1khz|acc[8]                      ;
+; 3:1                ; 57 bits   ; 114 LEs       ; 114 LEs              ; 0 LEs                  ; Yes        ; |top_reloj|freq_divider:divider_1hz|acc[41]                      ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_reloj|temp:temp|div10[2]                                    ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_reloj|cronometer:cronometer|bcd_counter_00_99:u_ms|ones[3]  ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_reloj|clock:clock|bcd_counter_00_59:u_sec|ones[0]           ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_reloj|cronometer:cronometer|bcd_counter_00_99:u_ms|tens[3]  ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_reloj|clock:clock|bcd_counter_00_59:u_sec|tens[2]           ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_reloj|cronometer:cronometer|bcd_counter_00_59:u_sec|ones[0] ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_reloj|clock:clock|bcd_counter_00_59:u_min|ones[1]           ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_reloj|cronometer:cronometer|bcd_counter_00_59:u_sec|tens[1] ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_reloj|clock:clock|bcd_counter_00_59:u_min|tens[3]           ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_reloj|cronometer:cronometer|bcd_counter_00_59:u_min|ones[3] ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_reloj|cronometer:cronometer|bcd_counter_00_59:u_min|tens[0] ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_reloj|cronometer:cronometer|div10[0]                        ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |top_reloj|clock:clock|bcd_counter_00_23:u_hour|tens[1]          ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |top_reloj|clock:clock|bcd_counter_00_23:u_hour|ones[2]          ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |top_reloj|temp:temp|bcd_down_00_99:u_cs|tens[2]                 ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |top_reloj|temp:temp|bcd_down_00_99:u_cs|ones[0]                 ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |top_reloj|temp:temp|bcd_down_00_59:u_sec|tens[0]                ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |top_reloj|temp:temp|bcd_down_00_59:u_sec|ones[3]                ;
+; 9:1                ; 4 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |top_reloj|temp:temp|bcd_down_00_59:u_min|ones[0]                ;
+; 10:1               ; 4 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |top_reloj|temp:temp|bcd_down_00_59:u_min|tens[2]                ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |top_reloj|clock:clock|horas_decenas[0]                          ;
+; 4:1                ; 42 bits   ; 84 LEs        ; 84 LEs               ; 0 LEs                  ; No         ; |top_reloj|mux:mux_disp_2|Mux6                                   ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |top_reloj|clock:clock|hour12                                    ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |top_reloj|clock:clock|hour12                                    ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |top_reloj ;
++----------------+-------+--------------------------------------------------+
+; Parameter Name ; Value ; Type                                             ;
++----------------+-------+--------------------------------------------------+
+; FREQ_1HZ       ; 1     ; Signed Integer                                   ;
+; FREQ_3HZ       ; 3     ; Signed Integer                                   ;
+; FREQ_1kHZ      ; 1000  ; Signed Integer                                   ;
++----------------+-------+--------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: freq_divider:divider_1hz ;
++----------------+----------+-------------------------------------------+
+; Parameter Name ; Value    ; Type                                      ;
++----------------+----------+-------------------------------------------+
+; FREQ_IN_HZ     ; 50000000 ; Signed Integer                            ;
+; FREQ_OUT_HZ    ; 1        ; Signed Integer                            ;
++----------------+----------+-------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: freq_divider:divider_3hz ;
++----------------+----------+-------------------------------------------+
+; Parameter Name ; Value    ; Type                                      ;
++----------------+----------+-------------------------------------------+
+; FREQ_IN_HZ     ; 50000000 ; Signed Integer                            ;
+; FREQ_OUT_HZ    ; 3        ; Signed Integer                            ;
++----------------+----------+-------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: freq_divider:divider_1khz ;
++----------------+----------+--------------------------------------------+
+; Parameter Name ; Value    ; Type                                       ;
++----------------+----------+--------------------------------------------+
+; FREQ_IN_HZ     ; 50000000 ; Signed Integer                             ;
+; FREQ_OUT_HZ    ; 1000     ; Signed Integer                             ;
++----------------+----------+--------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: clock:clock ;
++----------------+-------+---------------------------------+
+; Parameter Name ; Value ; Type                            ;
++----------------+-------+---------------------------------+
+; INIT_HH        ; 12    ; Signed Integer                  ;
+; INIT_MM        ; 0     ; Signed Integer                  ;
+; INIT_SS        ; 0     ; Signed Integer                  ;
+; INIT_IS_24H    ; 0     ; Unsigned Binary                 ;
++----------------+-------+---------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: clock:clock|bcd_counter_00_23:u_hour ;
++----------------+-------+----------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                     ;
++----------------+-------+----------------------------------------------------------+
+; INIT_VAL       ; 12    ; Signed Integer                                           ;
++----------------+-------+----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: buzzer:buzzer_alarma ;
++----------------+-------+------------------------------------------+
+; Parameter Name ; Value ; Type                                     ;
++----------------+-------+------------------------------------------+
+; N_SECONDS      ; 5     ; Signed Integer                           ;
++----------------+-------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_2_clock ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                       ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_2_cron ;
++----------------+-------+------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                 ;
++----------------+-------+------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                      ;
++----------------+-------+------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_2_temp ;
++----------------+-------+------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                 ;
++----------------+-------+------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                      ;
++----------------+-------+------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_2_alarm ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                       ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_3_clock ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                       ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_3_cron ;
++----------------+-------+------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                 ;
++----------------+-------+------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                      ;
++----------------+-------+------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_3_temp ;
++----------------+-------+------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                 ;
++----------------+-------+------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                      ;
++----------------+-------+------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_3_alarm ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                       ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_4_clock ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                       ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_4_cron ;
++----------------+-------+------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                 ;
++----------------+-------+------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                      ;
++----------------+-------+------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_4_temp ;
++----------------+-------+------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                 ;
++----------------+-------+------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                      ;
++----------------+-------+------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_4_alarm ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                       ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_5_clock ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                       ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_5_cron ;
++----------------+-------+------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                 ;
++----------------+-------+------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                      ;
++----------------+-------+------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_5_temp ;
++----------------+-------+------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                 ;
++----------------+-------+------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                      ;
++----------------+-------+------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_5_alarm ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                       ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_6_clock ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                       ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_6_cron ;
++----------------+-------+------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                 ;
++----------------+-------+------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                      ;
++----------------+-------+------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_6_temp ;
++----------------+-------+------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                 ;
++----------------+-------+------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                      ;
++----------------+-------+------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_6_alarm ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                       ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_7_clock ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                       ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_7_cron ;
++----------------+-------+------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                 ;
++----------------+-------+------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                      ;
++----------------+-------+------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_7_temp ;
++----------------+-------+------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                 ;
++----------------+-------+------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                      ;
++----------------+-------+------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seven_seg_decoder:display_7_alarm ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; comun          ; 0     ; Unsigned Binary                                       ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: clock:clock|lpm_divide:Mod0 ;
++------------------------+----------------+------------------------------------+
+; Parameter Name         ; Value          ; Type                               ;
++------------------------+----------------+------------------------------------+
+; LPM_WIDTHN             ; 32             ; Untyped                            ;
+; LPM_WIDTHD             ; 5              ; Untyped                            ;
+; LPM_NREPRESENTATION    ; SIGNED         ; Untyped                            ;
+; LPM_DREPRESENTATION    ; SIGNED         ; Untyped                            ;
+; LPM_PIPELINE           ; 0              ; Untyped                            ;
+; LPM_REMAINDERPOSITIVE  ; FALSE          ; Untyped                            ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                            ;
+; CBXI_PARAMETER         ; lpm_divide_soo ; Untyped                            ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                            ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                            ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                         ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                       ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                       ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                     ;
++------------------------+----------------+------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: clock:clock|lpm_divide:Div0 ;
++------------------------+----------------+------------------------------------+
+; Parameter Name         ; Value          ; Type                               ;
++------------------------+----------------+------------------------------------+
+; LPM_WIDTHN             ; 32             ; Untyped                            ;
+; LPM_WIDTHD             ; 5              ; Untyped                            ;
+; LPM_NREPRESENTATION    ; SIGNED         ; Untyped                            ;
+; LPM_DREPRESENTATION    ; SIGNED         ; Untyped                            ;
+; LPM_PIPELINE           ; 0              ; Untyped                            ;
+; LPM_REMAINDERPOSITIVE  ; FALSE          ; Untyped                            ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                            ;
+; CBXI_PARAMETER         ; lpm_divide_p0p ; Untyped                            ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                            ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                            ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                         ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                       ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                       ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                     ;
++------------------------+----------------+------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------+
+; Port Connectivity Checks: "mux:mux_disp_1"     ;
++--------------+-------+----------+--------------+
+; Port         ; Type  ; Severity ; Details      ;
++--------------+-------+----------+--------------+
+; data_1[6..4] ; Input ; Info     ; Stuck at GND ;
+; data_1[2..0] ; Input ; Info     ; Stuck at GND ;
+; data_1[3]    ; Input ; Info     ; Stuck at VCC ;
+; data_2[2..1] ; Input ; Info     ; Stuck at VCC ;
+; data_2[5..3] ; Input ; Info     ; Stuck at GND ;
+; data_2[6]    ; Input ; Info     ; Stuck at VCC ;
+; data_2[0]    ; Input ; Info     ; Stuck at GND ;
+; data_3[2..0] ; Input ; Info     ; Stuck at VCC ;
+; data_3[6..3] ; Input ; Info     ; Stuck at GND ;
++--------------+-------+----------+--------------+
+
+
++------------------------------------------------+
+; Port Connectivity Checks: "mux:mux_disp_0"     ;
++--------------+-------+----------+--------------+
+; Port         ; Type  ; Severity ; Details      ;
++--------------+-------+----------+--------------+
+; data_1[2..0] ; Input ; Info     ; Stuck at VCC ;
+; data_1[5..3] ; Input ; Info     ; Stuck at GND ;
+; data_1[6]    ; Input ; Info     ; Stuck at VCC ;
+; data_2[3..0] ; Input ; Info     ; Stuck at VCC ;
+; data_2[6]    ; Input ; Info     ; Stuck at GND ;
+; data_2[5]    ; Input ; Info     ; Stuck at VCC ;
+; data_2[4]    ; Input ; Info     ; Stuck at GND ;
+; data_3[3..2] ; Input ; Info     ; Stuck at VCC ;
+; data_3[6..4] ; Input ; Info     ; Stuck at GND ;
+; data_3[1..0] ; Input ; Info     ; Stuck at GND ;
++--------------+-------+----------+--------------+
+
+
++------------------------------------------------------------+
+; Port Connectivity Checks: "temp:temp|bcd_down_00_59:u_min" ;
++--------+--------+----------+-------------------------------+
+; Port   ; Type   ; Severity ; Details                       ;
++--------+--------+----------+-------------------------------+
+; borrow ; Output ; Info     ; Explicitly unconnected        ;
++--------+--------+----------+-------------------------------+
+
+
++------------------------------------------------------------+
+; Port Connectivity Checks: "temp:temp|bcd_down_00_59:u_sec" ;
++---------+-------+----------+-------------------------------+
+; Port    ; Type  ; Severity ; Details                       ;
++---------+-------+----------+-------------------------------+
+; tens_in ; Input ; Info     ; Stuck at GND                  ;
+; ones_in ; Input ; Info     ; Stuck at GND                  ;
++---------+-------+----------+-------------------------------+
+
+
++-----------------------------------------------------------+
+; Port Connectivity Checks: "temp:temp|bcd_down_00_99:u_cs" ;
++---------+-------+----------+------------------------------+
+; Port    ; Type  ; Severity ; Details                      ;
++---------+-------+----------+------------------------------+
+; tens_in ; Input ; Info     ; Stuck at GND                 ;
+; ones_in ; Input ; Info     ; Stuck at GND                 ;
++---------+-------+----------+------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "temp:temp"                                                                                                    ;
++-----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port      ; Type   ; Severity ; Details                                                                                                  ;
++-----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; flag_done ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++-----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "cronometer:cronometer|bcd_counter_00_59:u_min"                                       ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                             ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; carry ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "clock:clock|bcd_counter_00_23:u_hour"                                                ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                             ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; carry ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 64                          ;
+; cycloneiii_ff         ; 359                         ;
+;     CLR               ; 32                          ;
+;     CLR SCLR          ; 10                          ;
+;     ENA               ; 72                          ;
+;     ENA CLR           ; 22                          ;
+;     SCLR              ; 165                         ;
+;     SLD               ; 1                           ;
+;     plain             ; 57                          ;
+; cycloneiii_lcell_comb ; 1509                        ;
+;     arith             ; 455                         ;
+;         1 data inputs ; 5                           ;
+;         2 data inputs ; 380                         ;
+;         3 data inputs ; 70                          ;
+;     normal            ; 1054                        ;
+;         0 data inputs ; 16                          ;
+;         1 data inputs ; 27                          ;
+;         2 data inputs ; 247                         ;
+;         3 data inputs ; 204                         ;
+;         4 data inputs ; 560                         ;
+;                       ;                             ;
+; Max LUT depth         ; 30.90                       ;
+; Average LUT depth     ; 10.86                       ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:02     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+    Info: Processing started: Mon Jan 05 16:43:04 2026
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off digital_clock -c digital_clock
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 12 of the 12 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file freq_divider.v
+    Info (12023): Found entity 1: freq_divider File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/freq_divider.v Line: 1
+Warning (10275): Verilog HDL Module Instantiation warning at top_reloj.v(64): ignored dangling comma in List of Port Connections File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v Line: 64
+Warning (10275): Verilog HDL Module Instantiation warning at top_reloj.v(215): ignored dangling comma in List of Port Connections File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v Line: 215
+Info (12021): Found 1 design units, including 1 entities, in source file top_reloj.v
+    Info (12023): Found entity 1: top_reloj File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file fsm.v
+    Info (12023): Found entity 1: fsm File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/fsm.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file seven_seg_decoder.v
+    Info (12023): Found entity 1: seven_seg_decoder File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/seven_seg_decoder.v Line: 1
+Warning (12090): Entity "mux" obtained from "mux.v" instead of from Quartus Prime megafunction library File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/mux.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mux.v
+    Info (12023): Found entity 1: mux File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/mux.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file demux.v
+    Info (12023): Found entity 1: demux File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/demux.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file clock.v
+    Info (12023): Found entity 1: clock File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/clock.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file bcd_counter_00_59.v
+    Info (12023): Found entity 1: bcd_counter_00_59 File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/bcd_counter_00_59.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file bcd_counter_00_23.v
+    Info (12023): Found entity 1: bcd_counter_00_23 File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/bcd_counter_00_23.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file decoder_esp.v
+    Info (12023): Found entity 1: decoder_esp File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/decoder_esp.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file cronometer.v
+    Info (12023): Found entity 1: cronometer File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/cronometer.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file bcd_counter_00_99.v
+    Info (12023): Found entity 1: bcd_counter_00_99 File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/bcd_counter_00_99.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file temp.v
+    Info (12023): Found entity 1: temp File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/temp.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file alarm.v
+    Info (12023): Found entity 1: alarm File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/alarm.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file buzzer.v
+    Info (12023): Found entity 1: buzzer File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/buzzer.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file bcd_down_00_59.v
+    Info (12023): Found entity 1: bcd_down_00_59 File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/bcd_down_00_59.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file bcd_down_00_99.v
+    Info (12023): Found entity 1: bcd_down_00_99 File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/bcd_down_00_99.v Line: 1
+Info (12127): Elaborating entity "top_reloj" for the top level hierarchy
+Info (12128): Elaborating entity "freq_divider" for hierarchy "freq_divider:divider_1hz" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v Line: 42
+Info (12128): Elaborating entity "freq_divider" for hierarchy "freq_divider:divider_3hz" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v Line: 48
+Info (12128): Elaborating entity "freq_divider" for hierarchy "freq_divider:divider_1khz" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v Line: 54
+Info (12128): Elaborating entity "demux" for hierarchy "demux:demux" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v Line: 64
+Warning (10240): Verilog HDL Always Construct warning at demux.v(12): inferring latch(es) for variable "btn_temp", which holds its previous value in one or more paths through the always construct File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/demux.v Line: 12
+Warning (10240): Verilog HDL Always Construct warning at demux.v(12): inferring latch(es) for variable "btn_cron", which holds its previous value in one or more paths through the always construct File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/demux.v Line: 12
+Warning (10240): Verilog HDL Always Construct warning at demux.v(12): inferring latch(es) for variable "btn_alarm", which holds its previous value in one or more paths through the always construct File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/demux.v Line: 12
+Warning (10240): Verilog HDL Always Construct warning at demux.v(12): inferring latch(es) for variable "btn_clock", which holds its previous value in one or more paths through the always construct File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/demux.v Line: 12
+Info (10041): Inferred latch for "btn_clock[0]" at demux.v(12) File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/demux.v Line: 12
+Info (10041): Inferred latch for "btn_clock[1]" at demux.v(12) File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/demux.v Line: 12
+Info (10041): Inferred latch for "btn_clock[2]" at demux.v(12) File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/demux.v Line: 12
+Info (10041): Inferred latch for "btn_alarm[0]" at demux.v(12) File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/demux.v Line: 12
+Info (10041): Inferred latch for "btn_alarm[1]" at demux.v(12) File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/demux.v Line: 12
+Info (10041): Inferred latch for "btn_alarm[2]" at demux.v(12) File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/demux.v Line: 12
+Info (10041): Inferred latch for "btn_cron[0]" at demux.v(12) File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/demux.v Line: 12
+Info (10041): Inferred latch for "btn_cron[1]" at demux.v(12) File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/demux.v Line: 12
+Info (10041): Inferred latch for "btn_cron[2]" at demux.v(12) File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/demux.v Line: 12
+Info (10041): Inferred latch for "btn_temp[0]" at demux.v(12) File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/demux.v Line: 12
+Info (10041): Inferred latch for "btn_temp[1]" at demux.v(12) File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/demux.v Line: 12
+Info (10041): Inferred latch for "btn_temp[2]" at demux.v(12) File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/demux.v Line: 12
+Info (12128): Elaborating entity "fsm" for hierarchy "fsm:fsm" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v Line: 73
+Info (12128): Elaborating entity "clock" for hierarchy "clock:clock" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v Line: 110
+Info (10264): Verilog HDL Case Statement information at clock.v(87): all case item expressions in this case statement are onehot File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/clock.v Line: 87
+Warning (10230): Verilog HDL assignment warning at clock.v(226): truncated value with size 32 to match size of target (4) File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/clock.v Line: 226
+Warning (10230): Verilog HDL assignment warning at clock.v(227): truncated value with size 32 to match size of target (4) File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/clock.v Line: 227
+Warning (10240): Verilog HDL Always Construct warning at clock.v(207): inferring latch(es) for variable "hour12", which holds its previous value in one or more paths through the always construct File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/clock.v Line: 207
+Info (12128): Elaborating entity "bcd_counter_00_59" for hierarchy "clock:clock|bcd_counter_00_59:u_sec" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/clock.v Line: 151
+Info (12128): Elaborating entity "bcd_counter_00_23" for hierarchy "clock:clock|bcd_counter_00_23:u_hour" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/clock.v Line: 173
+Warning (10230): Verilog HDL assignment warning at bcd_counter_00_23.v(13): truncated value with size 32 to match size of target (4) File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/bcd_counter_00_23.v Line: 13
+Warning (10230): Verilog HDL assignment warning at bcd_counter_00_23.v(14): truncated value with size 32 to match size of target (4) File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/bcd_counter_00_23.v Line: 14
+Info (12128): Elaborating entity "alarm" for hierarchy "alarm:alarm" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v Line: 151
+Warning (10036): Verilog HDL or VHDL warning at alarm.v(25): object "rst" assigned a value but never read File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/alarm.v Line: 25
+Info (10264): Verilog HDL Case Statement information at alarm.v(98): all case item expressions in this case statement are onehot File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/alarm.v Line: 98
+Info (12128): Elaborating entity "cronometer" for hierarchy "cronometer:cronometer" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v Line: 183
+Info (12128): Elaborating entity "bcd_counter_00_99" for hierarchy "cronometer:cronometer|bcd_counter_00_99:u_ms" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/cronometer.v Line: 81
+Info (12128): Elaborating entity "temp" for hierarchy "temp:temp" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v Line: 215
+Info (12128): Elaborating entity "bcd_down_00_99" for hierarchy "temp:temp|bcd_down_00_99:u_cs" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/temp.v Line: 174
+Info (12128): Elaborating entity "bcd_down_00_59" for hierarchy "temp:temp|bcd_down_00_59:u_sec" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/temp.v Line: 187
+Info (12128): Elaborating entity "buzzer" for hierarchy "buzzer:buzzer_alarma" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v Line: 227
+Info (12128): Elaborating entity "decoder_esp" for hierarchy "decoder_esp:decorder_esp" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v Line: 235
+Info (12128): Elaborating entity "seven_seg_decoder" for hierarchy "seven_seg_decoder:display_2_clock" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v Line: 247
+Info (12128): Elaborating entity "mux" for hierarchy "mux:mux_disp_0" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v Line: 382
+Info (278001): Inferred 2 megafunctions from design logic
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "clock:clock|Mod0" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/clock.v Line: 227
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "clock:clock|Div0" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/clock.v Line: 226
+Info (12130): Elaborated megafunction instantiation "clock:clock|lpm_divide:Mod0" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/clock.v Line: 227
+Info (12133): Instantiated megafunction "clock:clock|lpm_divide:Mod0" with the following parameter: File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/clock.v Line: 227
+    Info (12134): Parameter "LPM_WIDTHN" = "32"
+    Info (12134): Parameter "LPM_WIDTHD" = "5"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "LPM_HINT" = "LPM_REMAINDERPOSITIVE=FALSE"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_soo.tdf
+    Info (12023): Found entity 1: lpm_divide_soo File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/db/lpm_divide_soo.tdf Line: 24
+Info (12021): Found 1 design units, including 1 entities, in source file db/abs_divider_kbg.tdf
+    Info (12023): Found entity 1: abs_divider_kbg File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/db/abs_divider_kbg.tdf Line: 28
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_67f.tdf
+    Info (12023): Found entity 1: alt_u_div_67f File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/db/alt_u_div_67f.tdf Line: 26
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_7pc.tdf
+    Info (12023): Found entity 1: add_sub_7pc File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/db/add_sub_7pc.tdf Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_8pc.tdf
+    Info (12023): Found entity 1: add_sub_8pc File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/db/add_sub_8pc.tdf Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_abs_2v9.tdf
+    Info (12023): Found entity 1: lpm_abs_2v9 File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/db/lpm_abs_2v9.tdf Line: 24
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_abs_i0a.tdf
+    Info (12023): Found entity 1: lpm_abs_i0a File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/db/lpm_abs_i0a.tdf Line: 24
+Info (12130): Elaborated megafunction instantiation "clock:clock|lpm_divide:Div0" File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/clock.v Line: 226
+Info (12133): Instantiated megafunction "clock:clock|lpm_divide:Div0" with the following parameter: File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/clock.v Line: 226
+    Info (12134): Parameter "LPM_WIDTHN" = "32"
+    Info (12134): Parameter "LPM_WIDTHD" = "5"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "LPM_HINT" = "LPM_REMAINDERPOSITIVE=FALSE"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_p0p.tdf
+    Info (12023): Found entity 1: lpm_divide_p0p File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/db/lpm_divide_p0p.tdf Line: 24
+Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Info (13014): Ignored 18 buffer(s)
+    Info (13016): Ignored 18 CARRY_SUM buffer(s)
+Info (13000): Registers with preset signals will power-up high File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/alarm.v Line: 59
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "disp_0[4]" is stuck at GND File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v Line: 12
+    Warning (13410): Pin "disp_1[4]" is stuck at GND File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v Line: 13
+    Warning (13410): Pin "disp_1[5]" is stuck at GND File: C:/DOCUMENTOS/14.- Proyectos/IC/Digital_Clock/top_reloj.v Line: 13
+Info (286030): Timing-Driven Synthesis is running
+Info (17049): 2 registers lost all their fanouts during netlist optimizations.
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 1581 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 6 input pins
+    Info (21059): Implemented 58 output pins
+    Info (21061): Implemented 1517 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 19 warnings
+    Info: Peak virtual memory: 4855 megabytes
+    Info: Processing ended: Mon Jan 05 16:43:16 2026
+    Info: Elapsed time: 00:00:12
+    Info: Total CPU time (on all processors): 00:00:22
+
+
